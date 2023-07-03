@@ -17,7 +17,11 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import environ 
 
+env = environ.Env()
+
+environ.Env.read_env()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -27,7 +31,7 @@ SECRET_KEY = 'django-insecure-ja)_%@%k9#zzw!yyyw+vk-7jsqa3w3$q(iw=7#*)v5ie$r#12y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -134,3 +138,9 @@ LOGIN_URL ="login"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+import dj_database_url
+
+DATABASES={
+    'default' : dj_database_url.parse(env('DATABASE_URL'))
+}
